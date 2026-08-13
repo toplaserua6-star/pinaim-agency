@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Star, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Reveal } from "./reveal";
+import avatar1 from "@/assets/review-1.jpg";
+import avatar2 from "@/assets/review-2.jpg";
+import avatar3 from "@/assets/review-3.jpg";
+import avatar4 from "@/assets/review-4.jpg";
+import avatar5 from "@/assets/review-5.jpg";
+import avatar6 from "@/assets/review-6.jpg";
 
 const reviews = [
   {
@@ -9,7 +15,7 @@ const reviews = [
     text: "За первый квартал ДРР упал с 42% до 13%. Главное — не отчёты ради отчётов, а понятные решения каждую неделю. Впервые вижу подрядчика, который говорит на языке денег.",
     source: "Отзыв в Google Картах",
     video: true,
-    initials: "ИВ",
+    photo: avatar1,
   },
   {
     name: "Марина Соколова",
@@ -17,7 +23,7 @@ const reviews = [
     text: "Записи выросли в 2.4 раза, при этом стоимость записи снизилась. Отдельно ценю прослушку звонков — нам показали, где теряет администратор, а не только реклама.",
     source: "Видеоотзыв",
     video: false,
-    initials: "МС",
+    photo: avatar2,
   },
   {
     name: "Алексей Дорохов",
@@ -25,7 +31,7 @@ const reviews = [
     text: "B2B с длинным циклом — сложная история, но ребята выстроили прогноз по сделкам, а не по кликам. 21 млн выручки с канала за год говорят сами за себя.",
     source: "Отзыв в Telegram-канале",
     video: false,
-    initials: "АД",
+    photo: avatar3,
   },
   {
     name: "Ольга Панина",
@@ -33,7 +39,23 @@ const reviews = [
     text: "Квалификация лидов выросла почти вдвое. Отдел продаж перестал тратить время на нецелевые обращения — это то, ради чего мы меняли подрядчика.",
     source: "Отзыв в Google Картах",
     video: true,
-    initials: "ОП",
+    photo: avatar4,
+  },
+  {
+    name: "Дмитрий Аверин",
+    role: "Основатель, LOFTA Furniture",
+    text: "Запустили контекст и таргет за две недели, первые заказы пошли на пятый день. CPL держится в плане уже восьмой месяц, а средний чек вырос за счёт правильных сегментов.",
+    source: "Отзыв в Яндекс Бизнесе",
+    video: false,
+    photo: avatar5,
+  },
+  {
+    name: "Екатерина Лапина",
+    role: "Директор по развитию, TravelUp",
+    text: "Нам собрали сквозную аналитику там, где раньше был хаос из таблиц. Теперь видно, какой канал приносит деньги, а какой просто жёг бюджет — отключили два и не потеряли в заявках.",
+    source: "Отзыв на Otzovik",
+    video: false,
+    photo: avatar6,
   },
 ];
 
@@ -68,9 +90,14 @@ export function Testimonials() {
         <Reveal delay={100}>
           <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-border bg-border lg:grid-cols-[1fr_1.3fr]">
             <div className="relative grid min-h-56 place-items-center bg-card p-8">
-              <div className="grid h-24 w-24 place-items-center rounded-full bg-primary/15 font-display text-2xl font-bold text-primary">
-                {r.initials}
-              </div>
+              <img
+                src={r.photo}
+                alt={`Фото клиента: ${r.name}`}
+                loading="lazy"
+                width={512}
+                height={512}
+                className="h-28 w-28 rounded-full object-cover ring-2 ring-primary/40"
+              />
               {r.video && (
                 <button className="absolute bottom-6 inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold transition hover:border-primary hover:text-primary">
                   <Play className="h-3.5 w-3.5 text-primary" /> Смотреть видеоотзыв
@@ -107,6 +134,41 @@ export function Testimonials() {
             </div>
           </div>
         </Reveal>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((rev, k) => (
+            <Reveal key={rev.name} delay={k * 60}>
+              <button
+                onClick={() => setI(k)}
+                className={`flex h-full w-full flex-col rounded-2xl border p-6 text-left transition hover:-translate-y-1 hover:border-primary/60 ${
+                  k === i ? "border-primary bg-primary/[0.06]" : "border-border bg-card"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <img
+                    src={rev.photo}
+                    alt={`Фото клиента: ${rev.name}`}
+                    loading="lazy"
+                    width={512}
+                    height={512}
+                    className="h-12 w-12 shrink-0 rounded-full object-cover"
+                  />
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-bold">{rev.name}</p>
+                    <p className="truncate text-xs text-muted-foreground">{rev.role}</p>
+                  </div>
+                </div>
+                <div className="mt-4 flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <Star key={s} className="h-3.5 w-3.5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="mt-3 line-clamp-4 text-sm text-muted-foreground">{rev.text}</p>
+                <p className="mt-4 text-xs text-primary">{rev.source}</p>
+              </button>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
