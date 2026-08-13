@@ -29,7 +29,7 @@ export function Header() {
         scrolled ? "glass py-3" : "py-5",
       )}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-2">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary font-display text-lg font-bold text-primary-foreground">
             R
