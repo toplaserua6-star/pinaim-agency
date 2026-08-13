@@ -197,7 +197,7 @@ export function Cases() {
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {list.map((c, i) => (
             <Reveal key={c.id} delay={i * 70}>
-              <article className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition hover:-translate-y-1 hover:border-primary/60">
+              <article className="group flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition duration-300 hover:-translate-y-1.5 hover:scale-[1.02] hover:border-primary/60 hover:shadow-[0_20px_60px_-25px_var(--primary)]">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <h3 className="truncate font-display text-xl font-bold">{c.client}</h3>
