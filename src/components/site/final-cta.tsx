@@ -22,7 +22,7 @@ export function FinalCta() {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
-                    href="https://t.me/"
+                    href="https://t.me/romi_agency"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold transition hover:border-primary hover:text-primary"

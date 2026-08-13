@@ -41,7 +41,7 @@ export function Footer() {
             <a href="mailto:hello@romi.agency" className="text-sm hover:text-primary">hello@romi.agency</a>
             <p className="text-sm text-muted-foreground">Москва, ул. Лесная, 7, офис 402</p>
             <div className="mt-1 flex gap-4 text-sm">
-              <a href="https://t.me/" target="_blank" rel="noreferrer" className="hover:text-primary">Telegram</a>
+              <a href="https://t.me/romi_agency" target="_blank" rel="noreferrer" className="hover:text-primary">Telegram</a>
               <a href="https://wa.me/74951234567" target="_blank" rel="noreferrer" className="hover:text-primary">WhatsApp</a>
             </div>
           </div>
