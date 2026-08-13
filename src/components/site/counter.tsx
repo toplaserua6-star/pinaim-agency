@@ -14,9 +14,15 @@ export function Counter({
 }) {
   const { ref, visible } = useReveal<HTMLSpanElement>(0.4);
   const [n, setN] = useState(0);
+  const [fallback, setFallback] = useState(false);
 
   useEffect(() => {
-    if (!visible) return;
+    const t = setTimeout(() => setFallback(true), 1500);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (!visible && !fallback) return;
     const start = performance.now();
     const dur = 1400;
     let raf = 0;
@@ -25,10 +31,11 @@ export function Counter({
       const eased = 1 - Math.pow(1 - p, 3);
       setN(value * eased);
       if (p < 1) raf = requestAnimationFrame(tick);
+      else setN(value);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [visible, value]);
+  }, [visible, fallback, value]);
 
   return (
     <span ref={ref}>
