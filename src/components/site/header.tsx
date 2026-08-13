@@ -31,8 +31,8 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-2">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary font-display text-lg font-bold text-primary-foreground">
-            R
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary">
+            <span className="h-2.5 w-2.5 rounded-sm bg-primary-foreground" />
           </span>
           <span className="truncate font-display text-lg font-bold tracking-tight">
             ROMI<span className="text-primary">.</span>agency

@@ -13,8 +13,8 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary font-display text-lg font-bold text-primary-foreground">
-                R
+              <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary">
+                <span className="h-2.5 w-2.5 rounded-sm bg-primary-foreground" />
               </span>
               <span className="font-display text-lg font-bold">
                 ROMI<span className="text-primary">.</span>agency
