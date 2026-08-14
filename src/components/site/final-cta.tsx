@@ -48,7 +48,7 @@ export function FinalCta() {
               <div className="rounded-2xl border border-border bg-card p-7 lg:p-8">
                 <h3 className="font-display text-xl font-bold">Заявка на бесплатный аудит</h3>
                 <div className="mt-6">
-                  <LeadForm withNiche cta="Оставить заявку" />
+                  <LeadForm withNiche cta="Оставить заявку" source="Форма аудита" />
                 </div>
               </div>
             </div>
