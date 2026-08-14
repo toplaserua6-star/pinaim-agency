@@ -193,8 +193,7 @@ export function Pricing() {
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
                 Предварительный расчёт · {niche}
               </p>
-              {shown ? (
-                <div className="mt-6 grid gap-6">
+              <div className="mt-6 grid gap-6">
                   <div>
                     <div className="font-display text-4xl font-bold text-primary">
                       {calc.fee.toLocaleString("ru-RU")} ₽
@@ -221,12 +220,7 @@ export function Pricing() {
                     </p>
                     <LeadForm cta="Получить расчёт" />
                   </div>
-                </div>
-              ) : (
-                <p className="mt-6 max-w-sm text-muted-foreground">
-                  Выберите нишу, бюджет и цель — покажем прогноз по заявкам, CPL и стоимости работ.
-                </p>
-              )}
+              </div>
             </div>
           </div>
         </Reveal>
