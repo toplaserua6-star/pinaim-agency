@@ -218,7 +218,7 @@ export function Pricing() {
                     <p className="mb-4 text-sm font-semibold">
                       Пришлём детальный расчёт и план на 3 месяца
                     </p>
-                    <LeadForm cta="Получить расчёт" />
+                    <LeadForm cta="Получить расчёт" source="Калькулятор стоимости" />
                   </div>
               </div>
             </div>
