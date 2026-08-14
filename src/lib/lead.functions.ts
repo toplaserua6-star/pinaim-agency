@@ -45,9 +45,12 @@ export const sendLead = createServerFn({ method: "POST" })
 
     let { status, result } = await send(CHAT_ID);
 
-    // Группа могла быть преобразована в супергруппу — у неё новый chat_id.
-    const migrated = result.parameters?.migrate_to_chat_id;
-    if (!result.ok && migrated) {
+    // Группа могла быть преобразована в супергруппу — у неё новый chat_id вида -100…
+    if (!result.ok) {
+      const migrated =
+        result.parameters?.migrate_to_chat_id ??
+        Number(`-100${CHAT_ID.replace("-", "")}`);
+      console.error(`Telegram retry with chat_id ${migrated}: ${result.description}`);
       ({ status, result } = await send(migrated));
     }
 
