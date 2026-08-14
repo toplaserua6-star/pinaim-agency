@@ -28,20 +28,32 @@ export const sendLead = createServerFn({ method: "POST" })
       data.source ? `Форма: ${escapeHtml(data.source)}` : null,
     ].filter(Boolean);
 
-    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: lines.join("\n"),
-        parse_mode: "HTML",
-      }),
-    });
+    const text = lines.join("\n");
+    const send = async (chatId: string | number) => {
+      const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML" }),
+      });
+      const result = (await response.json()) as {
+        ok?: boolean;
+        description?: string;
+        parameters?: { migrate_to_chat_id?: number };
+      };
+      return { status: response.status, result };
+    };
 
-    const result = (await response.json()) as { ok?: boolean; description?: string };
-    if (!response.ok || !result.ok) {
-      console.error(`Telegram sendMessage failed [${response.status}]: ${result.description}`);
-      throw new Error(`Telegram sendMessage failed [${response.status}]: ${result.description}`);
+    let { status, result } = await send(CHAT_ID);
+
+    // Группа могла быть преобразована в супергруппу — у неё новый chat_id.
+    const migrated = result.parameters?.migrate_to_chat_id;
+    if (!result.ok && migrated) {
+      ({ status, result } = await send(migrated));
+    }
+
+    if (!result.ok) {
+      console.error(`Telegram sendMessage failed [${status}]: ${result.description}`);
+      throw new Error(`Telegram sendMessage failed [${status}]: ${result.description}`);
     }
 
     return { ok: true as const };
