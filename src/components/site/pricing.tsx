@@ -36,7 +36,14 @@ const plans = [
   },
 ];
 
-const niches = ["E-commerce", "Услуги", "B2B", "Недвижимость", "Медицина", "Другое"];
+const niches = [
+  { name: "E-commerce", k: 0.85 },
+  { name: "Услуги", k: 1 },
+  { name: "B2B", k: 1.4 },
+  { name: "Недвижимость", k: 1.8 },
+  { name: "Медицина", k: 1.15 },
+  { name: "Другое", k: 1.05 },
+];
 const goals = [
   { id: "leads", label: "Больше заявок", k: 1 },
   { id: "cpl", label: "Снизить стоимость лида", k: 1.1 },
@@ -44,18 +51,18 @@ const goals = [
 ];
 
 export function Pricing() {
-  const [niche, setNiche] = useState(niches[0]!);
+  const [niche, setNiche] = useState(niches[0]!.name);
   const [budget, setBudget] = useState(300000);
   const [goal, setGoal] = useState(goals[0]!.id);
-  const [shown, setShown] = useState(false);
 
   const calc = useMemo(() => {
     const k = goals.find((g) => g.id === goal)!.k;
+    const nk = niches.find((n) => n.name === niche)!.k;
     const fee = Math.round((45000 + budget * 0.12) * k);
-    const cpl = Math.max(420, Math.round(2600 - budget / 900));
+    const cpl = Math.max(350, Math.round((2600 - budget / 900) * nk * (goal === "cpl" ? 0.82 : 1)));
     const leads = Math.round(budget / cpl);
     return { fee, cpl, leads };
-  }, [budget, goal]);
+  }, [budget, goal, niche]);
 
   return (
     <section id="pricing" className="border-t border-border py-24 lg:py-32">
@@ -122,16 +129,16 @@ export function Pricing() {
                   <div className="flex flex-wrap gap-2">
                     {niches.map((n) => (
                       <button
-                        key={n}
-                        onClick={() => setNiche(n)}
+                        key={n.name}
+                        onClick={() => setNiche(n.name)}
                         className={cn(
                           "rounded-lg border px-3 py-2 text-sm transition",
-                          niche === n
+                          niche === n.name
                             ? "border-primary text-primary"
                             : "border-border text-muted-foreground hover:text-foreground",
                         )}
                       >
-                        {n}
+                        {n.name}
                       </button>
                     ))}
                   </div>
@@ -149,7 +156,7 @@ export function Pricing() {
                     value={budget}
                     aria-label="Рекламный бюджет"
                     onChange={(e) => setBudget(Number(e.target.value))}
-                    className="w-full accent-[var(--primary)]"
+                    className="h-2 w-full cursor-pointer appearance-none rounded-full bg-secondary accent-[var(--primary)]"
                   />
                 </div>
 
@@ -173,12 +180,12 @@ export function Pricing() {
                   </div>
                 </div>
 
-                <button
-                  onClick={() => setShown(true)}
-                  className="rounded-xl bg-primary py-3.5 text-sm font-bold text-primary-foreground transition hover:brightness-110"
+                <a
+                  href="#lead"
+                  className="rounded-xl bg-primary py-3.5 text-center text-sm font-bold text-primary-foreground transition hover:brightness-110"
                 >
-                  Получить расчёт
-                </button>
+                  Получить точный расчёт
+                </a>
               </div>
             </div>
 
@@ -186,8 +193,7 @@ export function Pricing() {
               <p className="text-xs tracking-widest text-muted-foreground uppercase">
                 Предварительный расчёт · {niche}
               </p>
-              {shown ? (
-                <div className="mt-6 grid gap-6">
+              <div className="mt-6 grid gap-6">
                   <div>
                     <div className="font-display text-4xl font-bold text-primary">
                       {calc.fee.toLocaleString("ru-RU")} ₽
@@ -214,12 +220,7 @@ export function Pricing() {
                     </p>
                     <LeadForm cta="Получить расчёт" />
                   </div>
-                </div>
-              ) : (
-                <p className="mt-6 max-w-sm text-muted-foreground">
-                  Выберите нишу, бюджет и цель — покажем прогноз по заявкам, CPL и стоимости работ.
-                </p>
-              )}
+              </div>
             </div>
           </div>
         </Reveal>
