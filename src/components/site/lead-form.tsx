@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
+import { useServerFn } from "@tanstack/react-start";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { sendLead } from "@/lib/lead.functions";
 import { cn } from "@/lib/utils";
 
 const schema = z.object({
@@ -17,16 +19,22 @@ export function LeadForm({
   withNiche = false,
   layout = "stack",
   cta = "Оставить заявку",
+  source,
 }: {
   withNiche?: boolean;
   layout?: "stack" | "row";
   cta?: string;
+  source?: string;
 }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [open, setOpen] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const submitLead = useServerFn(sendLead);
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     const fd = new FormData(e.currentTarget);
     const parsed = schema.safeParse({
       name: String(fd.get("name") ?? ""),
@@ -40,9 +48,24 @@ export function LeadForm({
       return;
     }
     setErrors({});
-    // TODO: подключить backend/CRM — сюда приходят валидные данные заявки
-    e.currentTarget.reset();
-    setOpen(true);
+    setSendError(null);
+    setPending(true);
+    try {
+      await submitLead({
+        data: {
+          name: parsed.data.name,
+          contact: parsed.data.contact,
+          ...(parsed.data.niche ? { niche: parsed.data.niche } : {}),
+          ...(source ? { source } : {}),
+        },
+      });
+      form.reset();
+      setOpen(true);
+    } catch {
+      setSendError("Не удалось отправить заявку. Попробуйте ещё раз или напишите нам в Telegram.");
+    } finally {
+      setPending(false);
+    }
   };
 
   const field =
@@ -70,10 +93,14 @@ export function LeadForm({
         )}
         <button
           type="submit"
-          className="shrink-0 rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground transition hover:brightness-110 active:scale-[0.99]"
+          disabled={pending}
+          className="shrink-0 rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground transition hover:brightness-110 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {cta}
+          {pending ? "Отправляем..." : cta}
         </button>
+        {sendError && (
+          <p className="text-xs text-destructive sm:col-span-full">{sendError}</p>
+        )}
         <p className="text-xs text-muted-foreground sm:col-span-full">
           Уже 120+ компаний доверили нам маркетинг. Перезвоним за 15 минут.
         </p>
