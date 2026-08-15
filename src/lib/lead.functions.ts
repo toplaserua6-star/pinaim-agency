@@ -23,7 +23,7 @@ export const sendLead = createServerFn({ method: "POST" })
     if (!token) throw new Error("TELEGRAM_BOT_TOKEN is not configured");
 
     const lines = [
-      "<b>Новая заявка с сайта ROMI.agency</b>",
+      "<b>Новая заявка с сайта PinAim.agency</b>",
       `Имя: ${escapeHtml(data.name)}`,
       `Контакт: ${escapeHtml(data.contact)}`,
       data.niche ? `Ниша: ${escapeHtml(data.niche)}` : null,

@@ -14,7 +14,7 @@ import { FinalCta } from "@/components/site/final-cta";
 import { Footer } from "@/components/site/footer";
 import { FloatingChat } from "@/components/site/floating-chat";
 
-const title = "ROMI.agency — маркетинг под ключ: контекст, таргет, SEO";
+const title = "PinAim.agency — маркетинг под ключ: контекст, таргет, SEO";
 const description =
   "Performance-агентство полного цикла: контекстная и таргетированная реклама, SEO и маркетинг под ключ. 120+ проектов, средний ROMI 340%. Бесплатный аудит за 3 дня.";
 
@@ -36,10 +36,10 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
-          name: "ROMI.agency",
+          name: "PinAim.agency",
           description,
           telephone: "+7 495 123-45-67",
-          email: "hello@romi.agency",
+          email: "hello@pinaim.agency",
           address: {
             "@type": "PostalAddress",
             addressLocality: "Москва",

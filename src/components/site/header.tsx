@@ -35,7 +35,7 @@ export function Header() {
             <span className="h-2.5 w-2.5 rounded-sm bg-primary-foreground" />
           </span>
           <span className="truncate font-display text-lg font-bold tracking-tight">
-            ROMI<span className="text-primary">.</span>agency
+            PinAim<span className="text-primary">.</span>agency
           </span>
         </a>
 
