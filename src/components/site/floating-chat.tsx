@@ -8,7 +8,7 @@ export function FloatingChat() {
       {open && (
         <div className="animate-scale-in flex flex-col gap-2">
           <a
-            href="https://t.me/romi_agency"
+            href="https://t.me/pinaim_agency"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-3 text-sm font-medium shadow-lg"

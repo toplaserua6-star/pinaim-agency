@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ROMI.agency — performance-маркетинг под ключ" },
+      { title: "PinAim.agency — performance-маркетинг под ключ" },
       {
         name: "description",
         content:
           "Контекстная и таргетированная реклама, SEO и комплексный маркетинг для бизнеса.",
       },
-      { name: "author", content: "ROMI.agency" },
-      { property: "og:site_name", content: "ROMI.agency" },
+      { name: "author", content: "PinAim.agency" },
+      { property: "og:site_name", content: "PinAim.agency" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },

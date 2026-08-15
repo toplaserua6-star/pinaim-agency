@@ -17,7 +17,7 @@ export function Advantages() {
         <Reveal>
           <p className="text-sm font-semibold tracking-widest text-primary uppercase">О нас</p>
           <h2 className="mt-4 max-w-3xl font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.02] font-bold">
-            Почему выбирают ROMI.agency
+            Почему выбирают PinAim.agency
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
