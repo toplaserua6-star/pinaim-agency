@@ -8,7 +8,9 @@ const leadSchema = z.object({
   source: z.string().trim().max(80).optional(),
 });
 
-const CHAT_ID = "-5392774031";
+// Группа была преобразована в супергруппу, поэтому основной ID — с префиксом -100.
+const CHAT_ID = "-1004373285241";
+const LEGACY_CHAT_ID = "-5392774031";
 
 function escapeHtml(value: string) {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -45,13 +47,11 @@ export const sendLead = createServerFn({ method: "POST" })
 
     let { status, result } = await send(CHAT_ID);
 
-    // Группа могла быть преобразована в супергруппу — у неё новый chat_id вида -100…
+    // Фолбэк на старый ID группы / новый ID после миграции.
     if (!result.ok) {
-      const migrated =
-        result.parameters?.migrate_to_chat_id ??
-        Number(`-100${CHAT_ID.replace("-", "")}`);
-      console.error(`Telegram retry with chat_id ${migrated}: ${result.description}`);
-      ({ status, result } = await send(migrated));
+      const fallback = result.parameters?.migrate_to_chat_id ?? LEGACY_CHAT_ID;
+      console.error(`Telegram retry with chat_id ${fallback}: ${result.description}`);
+      ({ status, result } = await send(fallback));
     }
 
     if (!result.ok) {
