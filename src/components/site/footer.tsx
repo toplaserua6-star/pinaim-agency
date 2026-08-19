@@ -37,12 +37,12 @@ export function Footer() {
 
           <div className="grid content-start gap-3">
             <p className="text-xs tracking-widest text-muted-foreground uppercase">Контакты</p>
-            <a href="tel:+74951234567" className="text-sm hover:text-primary">+7 495 123-45-67</a>
+            <a href="tel:+79152336011" className="text-sm hover:text-primary">+7 915 233-60-11</a>
             <a href="mailto:hello@pinaim.agency" className="text-sm hover:text-primary">hello@pinaim.agency</a>
             <p className="text-sm text-muted-foreground">Москва, ул. Лесная, 7, офис 402</p>
             <div className="mt-1 flex gap-4 text-sm">
-              <a href="https://t.me/pinaim_agency" target="_blank" rel="noreferrer" className="hover:text-primary">Telegram</a>
-              <a href="https://wa.me/74951234567" target="_blank" rel="noreferrer" className="hover:text-primary">WhatsApp</a>
+              <a href="https://t.me/managaaaaa" target="_blank" rel="noreferrer" className="hover:text-primary">Telegram</a>
+              <a href="https://wa.me/79152336011" target="_blank" rel="noreferrer" className="hover:text-primary">WhatsApp</a>
             </div>
           </div>
         </div>

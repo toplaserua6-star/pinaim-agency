@@ -22,7 +22,7 @@ export function FinalCta() {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
-                    href="https://t.me/pinaim_agency"
+                    href="https://t.me/managaaaaa"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold transition hover:border-primary hover:text-primary"
@@ -30,7 +30,7 @@ export function FinalCta() {
                     <Send className="h-4 w-4 text-primary" /> Telegram
                   </a>
                   <a
-                    href="https://wa.me/74951234567"
+                    href="https://wa.me/79152336011"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold transition hover:border-primary hover:text-primary"
@@ -38,10 +38,10 @@ export function FinalCta() {
                     <MessageCircle className="h-4 w-4 text-primary" /> WhatsApp
                   </a>
                   <a
-                    href="tel:+74951234567"
+                    href="tel:+79152336011"
                     className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold transition hover:border-primary hover:text-primary"
                   >
-                    <Phone className="h-4 w-4 text-primary" /> +7 495 123-45-67
+                    <Phone className="h-4 w-4 text-primary" /> +7 915 233-60-11
                   </a>
                 </div>
               </div>
