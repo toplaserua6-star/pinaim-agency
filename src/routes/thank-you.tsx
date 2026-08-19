@@ -66,7 +66,7 @@ function ThankYou() {
               Вернуться на сайт
             </Link>
             <a
-              href="https://t.me/pinaim_agency"
+              href="https://t.me/managaaaaa"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3.5 text-sm font-semibold transition hover:border-primary hover:text-primary"
@@ -74,7 +74,7 @@ function ThankYou() {
               <Send className="h-4 w-4 text-primary" /> Telegram
             </a>
             <a
-              href="https://wa.me/74951234567"
+              href="https://wa.me/79152336011"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3.5 text-sm font-semibold transition hover:border-primary hover:text-primary"

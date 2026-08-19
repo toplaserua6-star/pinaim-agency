@@ -7,7 +7,7 @@ import { Process } from "@/components/site/process";
 import { Cases } from "@/components/site/cases";
 import { Testimonials } from "@/components/site/testimonials";
 import { Advantages } from "@/components/site/advantages";
-import { Team } from "@/components/site/team";
+
 import { Pricing } from "@/components/site/pricing";
 import { Faq } from "@/components/site/faq";
 import { FinalCta } from "@/components/site/final-cta";
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/")({
           "@type": "ProfessionalService",
           name: "PinAim.agency",
           description,
-          telephone: "+7 495 123-45-67",
+          telephone: "+7 915 233-60-11",
           email: "hello@pinaim.agency",
           address: {
             "@type": "PostalAddress",
@@ -68,7 +68,7 @@ function Index() {
         <Cases />
         <Testimonials />
         <Advantages />
-        <Team />
+        
         <Pricing />
         <Faq />
         <FinalCta />
