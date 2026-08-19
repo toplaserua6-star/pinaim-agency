@@ -59,5 +59,26 @@ export const sendLead = createServerFn({ method: "POST" })
       throw new Error(`Telegram sendMessage failed [${status}]: ${result.description}`);
     }
 
+    // Дублируем заявку на почту через Web3Forms.
+    try {
+      const mail = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "8bab22a8-3ed9-4cae-af76-e9cd4f3b9210",
+          subject: "Новая заявка с сайта PinAim.agency",
+          from_name: "PinAim.agency",
+          name: data.name,
+          contact: data.contact,
+          niche: data.niche ?? "—",
+          form: data.source ?? "—",
+        }),
+      });
+      const mailResult = (await mail.json()) as { success?: boolean; message?: string };
+      if (!mailResult.success) console.error(`Web3Forms failed: ${mailResult.message}`);
+    } catch (error) {
+      console.error("Web3Forms request error", error);
+    }
+
     return { ok: true as const };
   });
