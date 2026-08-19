@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { useServerFn } from "@tanstack/react-start";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { useNavigate } from "@tanstack/react-router";
 import { sendLead } from "@/lib/lead.functions";
 import { cn } from "@/lib/utils";
 
@@ -27,10 +27,10 @@ export function LeadForm({
   source?: string;
 }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [open, setOpen] = useState(false);
   const [pending, setPending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
   const submitLead = useServerFn(sendLead);
+  const navigate = useNavigate();
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,7 +60,7 @@ export function LeadForm({
         },
       });
       form.reset();
-      setOpen(true);
+      void navigate({ to: "/thank-you" });
     } catch {
       setSendError("Не удалось отправить заявку. Попробуйте ещё раз или напишите нам в Telegram.");
     } finally {
@@ -105,18 +105,6 @@ export function LeadForm({
           Уже 120+ компаний доверили нам маркетинг. Перезвоним за 15 минут.
         </p>
       </form>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="border-border bg-card">
-          <DialogHeader>
-            <DialogTitle className="font-display text-2xl">Спасибо за заявку</DialogTitle>
-            <DialogDescription className="text-muted-foreground">
-              Свяжемся с вами в течение 15 минут в рабочее время и подготовим бесплатный
-              экспресс-аудит вашей рекламы.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
     </>
   );
 }
